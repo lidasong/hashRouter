@@ -132,6 +132,8 @@
             this.unbind(router);
         }
         include(Router.prototype, {
+        	_initRouter:_init,
+        	_openHash:_openHash,
             addRouter: addRouter,
             removeRouter: removeRouter
         });

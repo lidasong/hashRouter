@@ -5,28 +5,34 @@ function HashView(hashviews, container) {
     this.init(hashviews);
 }
 
-function init(hashKeys) {
+HashView.prototype = {
+    init: init,
+    addHashView: addHashView,
+    removeHashView: removeHashView
+};
+
+function init(hashviews) {
     var hashKeys = Object.keys(hashviews),
         reg = /^#\w+/,
         self = this;
     hashKeys.forEach(function(key, index) {
         if (reg.test(hashviews[key])) {
-            self.router.addRouter({
-                key: function(ev, paras) {
-                    var id = hashviews[key],
-                        html = document.querySelector(id).innerHTML;
-                    self.container.innerHTML = html;
-                }
-            });
+            var routerItem = {};
+            routerItem[key] = function(ev, paras) {
+                var id = hashviews[key],
+                    html = document.querySelector(id).innerHTML;
+                self.container.innerHTML = html;
+            };
+            self.router.addRouter(routerItem);
         } else {
-            self.router.addRouter({
-                key: function(ev, paras) {
-                    var url = hashviews[key];
-                    self.xhr.load(url, function(res) {
-                        self.container.innerHTML = res;
-                    });
-                }
-            });
+            var routerItem = {};
+            routerItem[key] = function(ev, paras) {
+                var url = hashviews[key];
+                self.xhr.load(url, function(res) {
+                    self.container.innerHTML = res;
+                });
+            };
+            self.router.addRouter(routerItem);
         }
     });
 }
@@ -37,36 +43,39 @@ function addHashView(hashview) {
         self = this;
     if (reg.test(hashview[hashKey])) {
         this.router.addRouter({
-            hashKey: function(ev,paras) {
-            	var id = hashviews[key],
-            	    html = document.querySelector(id).innerHTML;
-            	self.container.innerHTML = html;
+            hashKey: function(ev, paras) {
+                var id = hashviews[key],
+                    html = document.querySelector(id).innerHTML;
+                self.container.innerHTML = html;
             }
         });
-    }else{
-    	this.router.addRouter({
-    	    key: function(ev, paras) {
-    	        var url = hashviews[key];
-    	        self.xhr.load(url, function(res) {
-    	            self.container.innerHTML = res;
-    	        });
-    	    }
-    	});
+    } else {
+        this.router.addRouter({
+            key: function(ev, paras) {
+                var url = hashviews[key];
+                self.xhr.load(url, function(res) {
+                    self.container.innerHTML = res;
+                });
+            }
+        });
     }
 }
 
-function removeHashView(hashKey){
-	this.router.removeRouter(hashKey);
+function removeHashView(hashKey) {
+    this.router.removeRouter(hashKey);
 }
 
-function XHR(){
-	this.xhr = new XMLHttpRequest();
+function XHR() {
+    this.xhr = new XMLHttpRequest();
+}
+XHR.prototype = {
+    load: load
 }
 
-function load(url,success){
-	this.xhr.open('get',url);
-	this.xhr.addEventListener('loadend',function(evt){
-		var responseHtml = evt.currentTarget.response;
-		success(responseHtml);
-	})
+function load(url, success) {
+    this.xhr.open('get', url);
+    this.xhr.addEventListener('loadend', function(evt) {
+        var responseHtml = evt.currentTarget.response;
+        success(responseHtml);
+    })
 }
