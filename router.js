@@ -115,7 +115,7 @@
                     currentHash = args[0];
                 args.shift();
                 if (self.events[currentHash])
-                    self.emit(currentHash, args.join('/'))
+                    self.emit(currentHash, ev, args.join('/'))
             });
         }
 
