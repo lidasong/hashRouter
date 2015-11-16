@@ -10,9 +10,9 @@
         module.exports = factory();
     } else {
         // Browser globals (root is window)
-        root.returnExports = factory();
+        root.Router = factory();
     }
-}(this, function() {
+}(window, function() {
     'use strict';
 
     function EventEmit() {
@@ -135,5 +135,5 @@
             removeRouter: removeRouter
         });
     })()
-    
-})).call(this);
+    return Router;
+}));
