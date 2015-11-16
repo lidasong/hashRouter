@@ -1,0 +1,17 @@
+{
+  "name": "hashrouter",
+  "version": "0.1.0",
+  "description": "使用hash实现路由规则，根据router来实现回调，试图渲染",
+  "main": "router.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository":"https://github.com/lidasong/hashRouter",
+  "keywords": [
+    "hash",
+    "router",
+    "view"
+  ],
+  "author": "lidasong",
+  "license": "MIT"
+}
