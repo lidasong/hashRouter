@@ -87,6 +87,7 @@
 
 
     function Router(routers) {
+        routers = routers || {};
         this._initRouter(routers);
         this._openHash();
     }
