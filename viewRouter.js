@@ -58,3 +58,15 @@ function addHashView(hashview) {
 function removeHashView(hashKey){
 	this.router.removeRouter(hashKey);
 }
+
+function XHR(){
+	this.xhr = new XMLHttpRequest();
+}
+
+function load(url,success){
+	this.xhr.open('get',url);
+	this.xhr.addEventListener('loadend',function(evt){
+		var responseHtml = evt.currentTarget.response;
+		success(responseHtml);
+	})
+}
