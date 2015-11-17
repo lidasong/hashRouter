@@ -53,7 +53,9 @@ hash后可以添加参数，监听器的响应包含hash的添加参数
 	}
 ```
 **container**:container为DOM容器，使用这个容器来显示视图
+
 **router**：即为hash路由
+
 **xhr**：使用ajax获取视图中html片段
 
 ```javascript
@@ -64,6 +66,7 @@ HashView.prototype = {
 };
 ```
 + _init:初始化视图监控器hashview
+
 **hashview**为视图的hash，形式为：
 ```javascript
 {
@@ -72,6 +75,8 @@ HashView.prototype = {
 }
 ```
 + addHashView
+
 添加一条新的视图hash
 + removeHashView
+
 删除已经含有的视图hash
