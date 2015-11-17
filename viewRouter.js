@@ -19,16 +19,16 @@
         this.container = container;
         this.router = new Router();
         this.xhr = new XHR();
-        this.init(hashviews);
+        this._init(hashviews);
     }
 
     HashView.prototype = {
-        init: init,
+        _init: _init,
         addHashView: addHashView,
         removeHashView: removeHashView
     };
 
-    function init(hashviews) {
+    function _init(hashviews) {
         var hashKeys = Object.keys(hashviews),
             reg = /^#\w+/,
             self = this;
